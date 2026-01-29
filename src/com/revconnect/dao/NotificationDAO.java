@@ -29,7 +29,7 @@ public class NotificationDAO {
 
         List<String> list = new ArrayList<>();
 
-        String sql = "SELECT message FROM notifications WHERE user_id=? ORDER BY created_at DESC";
+        String sql = "SELECT message, category, created_at FROM notifications WHERE user_id=? ORDER BY created_at DESC";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -38,7 +38,11 @@ public class NotificationDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                list.add(rs.getString("message"));
+                list.add(
+                		"[" + rs.getString("category") + "] "
+                                + rs.getString("message") +
+                                " (" + rs.getTimestamp("created_at") + ")"
+                		);
             }
 
         } catch (Exception e) {
