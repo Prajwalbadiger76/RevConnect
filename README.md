@@ -88,37 +88,6 @@ Eclipse / STS
 
 ---
 
-## PROJECT STRUCTURE
-
-RevConnect
-│
-├── com.revconnect.main
-│   └── MainApp.java
-│
-├── com.revconnect.model
-│   └── User, Post, Comment
-│
-├── com.revconnect.dao
-│   └── UserDAO
-│   └── PostDAO
-│   └── ConnectionDAO
-│   └── NotificationDAO
-│
-├── com.revconnect.service
-│   └── UserService
-│   └── PostService
-│   └── ConnectionService
-│   └── NotificationService
-│
-├── com.revconnect.util
-│   └── DBConnection
-│   └── PasswordUtil
-│
-├── com.revconnect.test
-│   └── JUnit Test Classes
-
----
-
 ## DATABASE SETUP
 
 1. Create required tables in Oracle:
