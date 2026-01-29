@@ -6,7 +6,7 @@ erDiagram
     USERS {
         int user_id PK
         string name
-        string email UNIQUE
+        string email
         string password
         string bio
         string user_type
