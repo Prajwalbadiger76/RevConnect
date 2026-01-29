@@ -23,8 +23,11 @@ public class MainApp {
 	    UserService service = new UserService();
 
 	    while (true) {
+	        
+	        System.out.println("\n=============================");
+	        System.out.println("   Welcome to RevConnect   ");
+	        System.out.println("=============================\n");
 
-	        System.out.println("\n==== RevConnect ====\n");
 	        System.out.println("1. Register");
 	        System.out.println("2. Login");
 	        System.out.println("3. Exit");
@@ -138,6 +141,7 @@ public class MainApp {
 	            String retry = sc.nextLine();
 
 	            if (retry.equals("2")) {
+	            	System.out.println("\n Returning to main menu...\n");
 	                return; // go back to main menu
 	            }
 	        }
@@ -181,10 +185,11 @@ public class MainApp {
         UserService userService = new UserService();
 
         
-        boolean running = true;
+        
 
-        while (running) {
+        while (true) {
         	int unread = notificationService.getUnreadCount(user.getUserId());
+        	
 
         	System.out.println("\n==== USER DASHBOARD ====");
         	System.out.println("\n Notifications (" + unread + " unread) \n");
@@ -217,8 +222,7 @@ public class MainApp {
             
             System.out.print("Choose option: ");
 
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option = getValidChoice(sc, 1, 20);
 
             switch (option) {
 
@@ -300,9 +304,7 @@ public class MainApp {
 
                 case 20:
                     System.out.println("\n Logged out successfully.");
-                    running = false;
-                    break;
-                 
+                    return;        
 
                 default:
                     System.out.println("\n Invalid option!");
