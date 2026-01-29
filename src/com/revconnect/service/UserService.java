@@ -74,5 +74,10 @@ public class UserService {
 
         return updated;
     }
+    
+    public int getUserIdByName(String name) {
+        return userDAO.getUserIdByName(name);
+    }
+
 
 }

@@ -89,34 +89,44 @@ public class NotificationDAO {
         return count;
     }
     
+    
     public boolean isNotificationEnabled(int userId, String type) {
 
-        String sql =
-            "SELECT " +
-            "CASE " +
-            "WHEN ?='LIKE' THEN like_enabled " +
-            "WHEN ?='COMMENT' THEN comment_enabled " +
-            "WHEN ?='FOLLOW' THEN follow_enabled " +
-            "END AS status " +
-            "FROM notification_preferences WHERE user_id=?";
+        String column = "";
+
+        switch (type) {
+            case "LIKE":
+                column = "like_enabled";
+                break;
+            case "COMMENT":
+                column = "comment_enabled";
+                break;
+            case "FOLLOW":
+                column = "follow_enabled";
+                break;
+            default:
+                return true;
+        }
+
+        String sql = "SELECT " + column + " FROM notification_preferences WHERE user_id = ?";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, type);
-            ps.setString(2, type);
-            ps.setInt(3, userId);
-
+            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
-                return "Y".equals(rs.getString("status"));
+                return "Y".equalsIgnoreCase(rs.getString(1));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return true; // default allow
     }
+
 
 
 }

@@ -128,6 +128,8 @@ public class MainApp {
         PostService postService = new PostService();
         ConnectionService connectionService = new ConnectionService();
         NotificationService notificationService = new NotificationService();
+        UserService userService = new UserService();
+
         
         boolean running = true;
 
@@ -211,7 +213,7 @@ public class MainApp {
                     break;
                     
                 case 11:
-                    followUser(user, sc, connectionService, notificationService);
+                	followUser(user, sc, connectionService, notificationService, userService);
                     break;
 
                 case 12:
@@ -485,25 +487,34 @@ public class MainApp {
     }
 
     
-    private static void followUser( User user, Scanner sc, ConnectionService service, NotificationService notificationService) {
+    private static void followUser( User user, Scanner sc, ConnectionService service, NotificationService notificationService, UserService userService) {
+    	
+    	ConnectionService connectionService = new ConnectionService();
+        System.out.print("Enter username to follow: ");
+        String name = sc.nextLine();
+        int targetUserId = userService.getUserIdByName(name);
 
-        System.out.print("Enter User ID to follow: ");
-        int targetUserId = sc.nextInt();
+        if (targetUserId == -1) {
+            System.out.println("❌ User not found.");
+            return;
+        }
 
-        if (service.followUser(user.getUserId(), targetUserId)) {
+        if (connectionService.followUser(user.getUserId(), targetUserId)) {
 
             System.out.println("✅ Follow request sent!");
 
             notificationService.notifyUser(
-            	    targetUserId,
-            	    "You have a new follower",
-            	    "FOLLOW"
-            	);
+                targetUserId,
+                "You have a new follower!",
+                "FOLLOW"
+            );
 
         } else {
-            System.out.println("❌ Already following or invalid user.");
+            System.out.println("❌ Already following or request exists.");
         }
     }
+    
+    
 
     
 

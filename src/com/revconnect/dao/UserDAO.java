@@ -116,6 +116,30 @@ public class UserDAO {
 
         return user;
     }
+    
+ // ================= GET USER BY EMAIL (NEW) =================
+    
+    public int getUserIdByName(String name) {
+
+        String sql = "SELECT user_id FROM users WHERE LOWER(name) = LOWER(?)";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
 
     // ================= UPDATE PROFILE =================
     public boolean updateProfile(User user) {

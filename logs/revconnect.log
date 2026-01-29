@@ -74,3 +74,13 @@
 2026-01-29 00:52:34 [INFO] com.revconnect.service.UserService - Login successful for: prajwal@gmail.com
 2026-01-29 01:01:28 [INFO] com.revconnect.service.UserService - Login attempt for email: prajwal@gmail.com
 2026-01-29 01:01:29 [INFO] com.revconnect.service.UserService - Login successful for: prajwal@gmail.com
+2026-01-29 10:02:12 [INFO] com.revconnect.service.UserService - Attempting to register user: test2@gmail.com
+2026-01-29 10:02:12 [INFO] com.revconnect.service.UserService - User registered successfully: test2@gmail.com
+2026-01-29 10:02:25 [INFO] com.revconnect.service.UserService - Login attempt for email: test2@gmail.com
+2026-01-29 10:02:25 [INFO] com.revconnect.service.UserService - Login successful for: test2@gmail.com
+2026-01-29 10:06:19 [INFO] com.revconnect.service.LikeService - User 17 attempting to like post 1
+2026-01-29 10:06:19 [INFO] com.revconnect.service.LikeService - Post 1 liked successfully by user 17
+2026-01-29 10:19:29 [INFO] com.revconnect.service.UserService - Login attempt for email: test2@gmail.com
+2026-01-29 10:19:29 [INFO] com.revconnect.service.UserService - Login successful for: test2@gmail.com
+2026-01-29 10:21:12 [INFO] com.revconnect.service.UserService - Login attempt for email: rahul@gmail.com
+2026-01-29 10:21:12 [INFO] com.revconnect.service.UserService - Login successful for: rahul@gmail.com
