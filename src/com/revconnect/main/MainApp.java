@@ -16,110 +16,145 @@ import com.revconnect.service.UserService;
 import com.revconnect.service.ConnectionService;
 
 public class MainApp {
+	
+	public static void main(String[] args) {
 
-    public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    UserService service = new UserService();
 
-        Scanner sc = new Scanner(System.in);
-        UserService service = new UserService();
+	    while (true) {
 
-        System.out.println("==== RevConnect ====");
-        System.out.println("1. Register");
-        System.out.println("2. Login");
-        System.out.print("Choose option: ");
+	        System.out.println("\n==== RevConnect ====\n");
+	        System.out.println("1. Register");
+	        System.out.println("2. Login");
+	        System.out.println("3. Exit");
+	        System.out.print("\nChoose option: ");
 
-        int choice = sc.nextInt();
-        sc.nextLine();
+	        int choice = getValidChoice(sc, 1, 3); 
 
-        if (choice == 1) {
+	        switch (choice) {
 
-            System.out.print("Enter Name: ");
-            String name = sc.nextLine();
+	            case 1:
+	            	System.out.println("\n==== REGISTER ====\n");
 
-            System.out.print("Enter Email: ");
-            String email = sc.nextLine();
+	                System.out.print("Enter Name: ");
+	                String name = sc.nextLine();
 
-            System.out.print("Enter Password: ");
-            String password = sc.nextLine();
+	                System.out.print("Enter Email: ");
+	                String email = sc.nextLine();
 
-            System.out.print("Enter Bio: ");
-            String bio = sc.nextLine();
+	                System.out.print("Enter Password: ");
+	                String password = sc.nextLine();
 
-            System.out.print("Enter User Type(PERSONAL/CREATOR/SOCIAL): ");
-            String type = sc.nextLine();
-            
-            System.out.print("Enter Profile Picture Path: ");
-            String pic = sc.nextLine();
+	                System.out.print("Enter Bio: ");
+	                String bio = sc.nextLine();
 
-            System.out.print("Enter Location: ");
-            String location = sc.nextLine();
+	                System.out.print("Enter User Type (PERSONAL/CREATOR/SOCIAL): ");
+	                String type = sc.nextLine();
 
-            System.out.print("Enter Website: ");
-            String website = sc.nextLine();
+	                System.out.print("Enter Profile Picture Path: ");
+	                String pic = sc.nextLine();
 
-            
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setBio(bio);
-            user.setUserType(type);
-            
-            user.setProfilePic(pic);
-            user.setLocation(location);
-            user.setWebsite(website);
-            
-            if (service.register(user)) {
-                System.out.println("✅ Registration Successful!");
-                System.out.println("\n👉 Please login to continue...\n");
-                loginFlow(service, sc);
-            } else {
-                System.out.println("❌ Registration Failed!");
-            }
+	                System.out.print("Enter Location: ");
+	                String location = sc.nextLine();
 
-        } else if (choice == 2) {
-            loginFlow(service, sc);
-        }
+	                System.out.print("Enter Website: ");
+	                String website = sc.nextLine();
 
-        sc.close();
-    }
+	                User user = new User();
+	                user.setName(name);
+	                user.setEmail(email);
+	                user.setPassword(password);
+	                user.setBio(bio);
+	                user.setUserType(type);
+	                user.setProfilePic(pic);
+	                user.setLocation(location);
+	                user.setWebsite(website);
+
+	                if (service.register(user)) {
+	                    System.out.println("Registration Successful!");
+	                    System.out.println("Please login to continue...\n");
+	                    loginFlow(service, sc);
+	                } else {
+	                    System.out.println("Registration Failed!");
+	                }
+	                break;
+
+	            case 2:
+	                loginFlow(service, sc);
+	                break;
+
+	            case 3:
+	                System.out.println("Exiting application!!");
+	                System.exit(0);
+
+	            default:
+	                System.out.println("Invalid choice!!");
+	        }
+	    }
+	}
+
+
 
     // ================= LOGIN FLOW =================
 
-    private static void loginFlow(UserService service, Scanner sc) {
+	private static void loginFlow(UserService service, Scanner sc) {
+		
+		System.out.println("\n==== LOGIN ====\n");
 
-        boolean loggedIn = false;
+	    boolean loggedIn = false;
 
-        while (!loggedIn) {
+	    while (!loggedIn) {
 
-            System.out.print("Enter Email: ");
-            String email = sc.nextLine();
+	        System.out.print("Enter Email: ");
+	        String email = sc.nextLine();
 
-            System.out.print("Enter Password: ");
-            String password = sc.nextLine();
+	        System.out.print("Enter Password: ");
+	        String password = sc.nextLine();
 
-            User loggedUser = service.login(email, password);
+	        User loggedUser = service.login(email, password);
 
-            if (loggedUser != null) {
-                System.out.println("✅ Login Successful!");
-                showProfileMenu(loggedUser, service, sc);
-                loggedIn = true;
-            } else {
-                System.out.println("❌ Invalid email or password!");
+	        if (loggedUser != null) {
+	            System.out.println("\n Login Successful!");
+	            showProfileMenu(loggedUser, service, sc);
+	            loggedIn = true;
+	        } else {
+	            System.out.println("Invalid email or password!");
 
-                System.out.println("1. Try Again");
-                System.out.println("2. Exit");
-                System.out.print("Choose option: ");
+	            System.out.println("1. Try Again");
+	            System.out.println("2. Back to Main Menu");
+	            System.out.print("Choose option: ");
 
-                int retry = sc.nextInt();
-                sc.nextLine();
+	            String retry = sc.nextLine();
 
-                if (retry == 2) {
-                    System.out.println("👋 Exiting application.");
-                    break;
-                }
-            }
-        }
-    }
+	            if (retry.equals("2")) {
+	                return; // go back to main menu
+	            }
+	        }
+	    }
+	}
+	
+	private static int getValidChoice(Scanner sc, int min, int max) {
+
+	    while (true) {
+	        String input = sc.nextLine();
+
+	        if (!input.matches("\\d+")) {
+	            System.out.print("Invalid input! Enter numbers only: ");
+	            continue;
+	        }
+
+	        int choice = Integer.parseInt(input);
+
+	        if (choice < min || choice > max) {
+	            System.out.print("Please enter a number between " + min + " and " + max + ": ");
+	            continue;
+	        }
+
+	        return choice;
+	    }
+	}
+
 
     // ================= DASHBOARD =================
 
@@ -137,7 +172,7 @@ public class MainApp {
         	int unread = notificationService.getUnreadCount(user.getUserId());
 
         	System.out.println("\n==== USER DASHBOARD ====");
-        	System.out.println("\n🔔 Notifications (" + unread + " unread) \n");
+        	System.out.println("\n Notifications (" + unread + " unread) \n");
 
 
 //            System.out.println("\n==== USER DASHBOARD ====");
@@ -249,13 +284,13 @@ public class MainApp {
                     break;
 
                 case 20:
-                    System.out.println("👋 Logged out successfully.");
+                    System.out.println("\n Logged out successfully.");
                     running = false;
                     break;
                  
 
                 default:
-                    System.out.println("❌ Invalid option!");
+                    System.out.println("\n Invalid option!");
             }
         }
     }
@@ -279,9 +314,9 @@ public class MainApp {
         boolean result = postService.createPost(post);
 
         if (result) {
-            System.out.println("✅ Post created successfully!");
+            System.out.println("\n Post created successfully!");
         } else {
-            System.out.println("❌ Failed to create post!");
+            System.out.println("\n Failed to create post!");
         }
     }
 
@@ -339,9 +374,9 @@ public class MainApp {
         boolean updated = service.updateProfile(user);
 
         if (updated) {
-            System.out.println("✅ Profile updated successfully!");
+            System.out.println("\n Profile updated successfully!");
         } else {
-            System.out.println("❌ Failed to update profile!");
+            System.out.println("\n Failed to update profile!");
         }
     }
     
@@ -361,9 +396,9 @@ public class MainApp {
         boolean deleted = postService.deletePost(postId, user.getUserId());
 
         if (deleted) {
-            System.out.println("✅ Post deleted successfully!");
+            System.out.println("\n Post deleted successfully!");
         } else {
-            System.out.println("❌ Failed to delete post (Invalid ID or not your post)");
+            System.out.println("\n Failed to delete post (Invalid ID or not your post)");
         }
     }
     
@@ -388,9 +423,9 @@ public class MainApp {
             		);
             }
 
-            System.out.println("✅ Post liked successfully!");
+            System.out.println("\n Post liked successfully!");
         } else {
-            System.out.println("⚠️ You already liked this post.");
+            System.out.println("\n You already liked this post.");
         }
     }
 
@@ -420,9 +455,9 @@ public class MainApp {
             		);
             }
 
-            System.out.println("✅ Comment added!");
+            System.out.println("\n Comment added!");
         } else {
-            System.out.println("❌ Failed to add comment.");
+            System.out.println("\n Failed to add comment.");
         }
     }
 
@@ -459,7 +494,7 @@ public class MainApp {
         LikeService service = new LikeService();
         int count = service.getLikeCount(postId);
 
-        System.out.println("👍 Total Likes: " + count);
+        System.out.println("\n Total Likes: " + count);
     }
 
     private static void searchUser(UserService service, Scanner sc) {
@@ -470,7 +505,7 @@ public class MainApp {
         List<User> users = service.searchUsers(keyword);
 
         if (users.isEmpty()) {
-            System.out.println("❌ No users found.");
+            System.out.println("\n No users found.");
             return;
         } else {
             System.out.println("\n===== SEARCH RESULTS =====");
@@ -495,13 +530,13 @@ public class MainApp {
         int targetUserId = userService.getUserIdByName(name);
 
         if (targetUserId == -1) {
-            System.out.println("❌ User not found.");
+            System.out.println("\n User not found.");
             return;
         }
 
         if (connectionService.followUser(user.getUserId(), targetUserId)) {
 
-            System.out.println("✅ Follow request sent!");
+            System.out.println("\n Follow request sent!");
 
             notificationService.notifyUser(
                 targetUserId,
@@ -510,7 +545,7 @@ public class MainApp {
             );
 
         } else {
-            System.out.println("❌ Already following or request exists.");
+            System.out.println("\n Already following or request exists.");
         }
     }
     
@@ -532,7 +567,7 @@ public class MainApp {
             return;
         }
 
-        System.out.println("\nPending Requests:");
+        System.out.println("\n Pending Requests:");
         for (int id : pending) {
             User u = userService.getUserProfile(id);
             System.out.println("User ID: " + id + " | Name: " + u.getName());
@@ -543,14 +578,14 @@ public class MainApp {
 
         // ✅ VALIDATE INPUT
         if (!pending.contains(followerId)) {
-            System.out.println("❌ Invalid user selection.");
+            System.out.println("\n Invalid user selection.");
             return;
         }
         
         boolean accepted = connectionService.acceptFollow(followerId, user.getUserId());
 
         if (accepted) {
-            System.out.println("✅ Follow request accepted!");
+            System.out.println("\n Follow request accepted!");
 
             notificationService.notifyUser(
                 followerId,
@@ -558,7 +593,7 @@ public class MainApp {
                 "FOLLOW"
             );
         } else {
-            System.out.println("❌ Something went wrong.");
+            System.out.println("\n Something went wrong.");
         }
         
     }
@@ -568,11 +603,11 @@ public class MainApp {
         List<User> followers = service.getFollowers(user.getUserId());
 
         if (followers.isEmpty()) {
-            System.out.println("❌ No followers yet.");
+            System.out.println("\n No followers yet.");
             return;
         }
 
-        System.out.println("👥 Your Followers (" + followers.size() + "):");
+        System.out.println("\n Your Followers (" + followers.size() + "):");
 
         for (User u : followers) {
             System.out.println("----------------------");
@@ -589,11 +624,11 @@ public class MainApp {
         List<User> following = service.getFollowing(user.getUserId());
 
         if (following.isEmpty()) {
-            System.out.println("❌ You are not following anyone.");
+            System.out.println("\n You are not following anyone.");
             return;
         }
 
-        System.out.println("➡ You are following (" + following.size() + "):");
+        System.out.println("\n You are following (" + following.size() + "):");
 
         for (User u : following) {
             System.out.println("----------------------");
@@ -610,9 +645,9 @@ public class MainApp {
         int unfollowId = sc.nextInt();
 
         if (service.unfollowUser(user.getUserId(), unfollowId)) {
-            System.out.println("✅ Unfollowed successfully.");
+            System.out.println("\n Unfollowed successfully.");
         } else {
-            System.out.println("❌ You are not following this user.");
+            System.out.println("\n You are not following this user.");
         }
     }
     
@@ -621,9 +656,9 @@ public class MainApp {
         List<String> notifications = service.getNotifications(user.getUserId());
 
         if (notifications.isEmpty()) {
-            System.out.println("🔔 No notifications.");
+            System.out.println("\n No notifications.");
         } else {
-            System.out.println("🔔 Notifications:");
+            System.out.println("\n Notifications:");
             for (String n : notifications) {
                 System.out.println("- " + n);
             }
@@ -639,9 +674,9 @@ public class MainApp {
         LikeService service = new LikeService();
 
         if (service.unlikePost(postId, user.getUserId())) {
-            System.out.println("✅ Post unliked successfully.");
+            System.out.println("\n Post unliked successfully.");
         } else {
-            System.out.println("❌ You haven't liked this post.");
+            System.out.println("\n You haven't liked this post.");
         }
     }
 
@@ -654,9 +689,9 @@ public class MainApp {
         CommentService service = new CommentService();
 
         if (service.deleteComment(commentId, user.getUserId())) {
-            System.out.println("✅ Comment deleted.");
+            System.out.println("\n Comment deleted.");
         } else {
-            System.out.println("❌ You can delete only your comments.");
+            System.out.println("\n You can delete only your comments.");
         }
     }
     
@@ -668,12 +703,10 @@ public class MainApp {
         PostService service = new PostService();
 
         if (service.sharePost(user.getUserId(), postId)) {
-            System.out.println("🔁 Post shared successfully!");
+            System.out.println("\n Post shared successfully!");
         } else {
-            System.out.println("❌ Failed to share post.");
+            System.out.println("\n Failed to share post.");
         }
     }
-
-
 
 }

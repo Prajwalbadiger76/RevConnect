@@ -145,3 +145,7 @@
 2026-01-29 14:21:59 [INFO] com.revconnect.service.UserService - Fetching profile for user ID: 22
 2026-01-29 14:22:50 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
 2026-01-29 14:22:50 [INFO] com.revconnect.service.LikeService - Post 1 has 3 likes
+2026-01-29 15:00:51 [INFO] com.revconnect.service.UserService - Login attempt for email: prajwal@gmail.com
+2026-01-29 15:00:52 [INFO] com.revconnect.service.UserService - Login successful for: prajwal@gmail.com
+2026-01-29 15:07:57 [INFO] com.revconnect.service.UserService - Login attempt for email: user1@gmail.com
+2026-01-29 15:07:57 [INFO] com.revconnect.service.UserService - Login successful for: user1@gmail.com
