@@ -8,6 +8,11 @@ public class User {
     private String password;
     private String bio;
     private String userType;
+    private String profilePic;
+    private String location;
+    private String website;
+    
+
 
     // Getters and Setters
     public int getUserId() { return userId; }
@@ -27,4 +32,16 @@ public class User {
 
     public String getUserType() { return userType; }
     public void setUserType(String userType) { this.userType = userType; }
+
+    public String getProfilePic() { return profilePic; }
+    public void setProfilePic(String profilePic) { this.profilePic = profilePic; }
+
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
+
+    public String getWebsite() { return website; }
+    public void setWebsite(String website) { this.website = website; }
+
+   
+
 }
