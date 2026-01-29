@@ -39,9 +39,19 @@ public class MainApp {
 
 	                System.out.print("Enter Name: ");
 	                String name = sc.nextLine();
+	                
+	                String email;
+	                while (true) {
+	                    System.out.print("Enter Email: ");
+	                    email = sc.nextLine();
 
-	                System.out.print("Enter Email: ");
-	                String email = sc.nextLine();
+	                    if (isValidEmail(email)) {
+	                        break;
+	                    } else {
+	                        System.out.println("\n Invalid email format! Example: user@gmail.com");
+	                    }
+	                }
+
 
 	                System.out.print("Enter Password: ");
 	                String password = sc.nextLine();
@@ -154,6 +164,11 @@ public class MainApp {
 	        return choice;
 	    }
 	}
+	
+	private static boolean isValidEmail(String email) {
+	    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+	}
+
 
 
     // ================= DASHBOARD =================
