@@ -33,4 +33,12 @@ public class LikeServiceTest {
 
         assertTrue(result);
     }
+    
+    @Test
+    void testLikeCount() {
+    	LikeService likeService = new LikeService();
+        int count = likeService.getLikeCount(1);
+        assertTrue(count >= 0);
+    }
+
 }

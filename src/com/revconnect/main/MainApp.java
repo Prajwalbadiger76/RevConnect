@@ -1,6 +1,3 @@
-//package com.revconnect.main;
-
-
 package com.revconnect.main;
 
 import java.util.List;
@@ -184,18 +181,12 @@ public class MainApp {
         NotificationService notificationService = new NotificationService();
         UserService userService = new UserService();
 
-        
-        
-
         while (true) {
         	int unread = notificationService.getUnreadCount(user.getUserId());
-        	
 
         	System.out.println("\n==== USER DASHBOARD ====");
         	System.out.println("\n Notifications (" + unread + " unread) \n");
 
-
-//            System.out.println("\n==== USER DASHBOARD ====");
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
             System.out.println("3. Create Post");
@@ -215,11 +206,8 @@ public class MainApp {
             System.out.println("17. Unlike Post");
             System.out.println("18. Delete Comment");
             System.out.println("19. Share Post");
-            
             System.out.println("20. Logout");
 
-
-            
             System.out.print("Choose option: ");
 
             int option = getValidChoice(sc, 1, 20);
@@ -230,82 +218,63 @@ public class MainApp {
                     User profile = service.getUserProfile(user.getUserId());
                     displayProfile(profile);
                     break;
-
                 case 2:
                     editProfile(user, service, sc);
                     break;
-
                 case 3:
                     createPost(user, postService, sc);
                     break;
-
                 case 4:
                     viewMyPosts(user, postService);
                     break;
-                    
                 case 5:
                     deletePost(user, postService, sc);
-                    break;
-                    
+                    break;        
                 case 6:
                     likePost(user, sc);
                     break;
-
                 case 7:
                     commentPost(user, sc);
-                    break;
-                    
+                    break;    
                 case 8:
                     viewComments(sc);
-                    break;
-                    
+                    break;   
                 case 9:
                     viewLikeCount(sc);
                     break;
                 case 10:
                     searchUser(service, sc);
-                    break;
-                    
+                    break;                    
                 case 11:
                 	followUser(user, sc, connectionService, notificationService, userService);
                     break;
-
                 case 12:
                     acceptFollow(user, sc, connectionService, notificationService,userService);
-                    break;
-                    
+                    break;                   
                 case 13:
                     viewFollowers(user, connectionService);
                     break;
-
                 case 14:
                     viewFollowing(user, connectionService);
                     break;
-
                 case 15:
                     unfollowUser(user, sc, connectionService);
-                    break;
-                    
+                    break;                  
                 case 16:
                     viewNotifications(user, notificationService);
                     break;
-                    
                 case 17:
                     unlikePost(user, sc);
                     break;
-                    
                 case 18:
                     deleteComment(user, sc);
                     break;
-                    
                 case 19:
                     sharePost(user, sc);
                     break;
-
                 case 20:
                     System.out.println("\n Logged out successfully.");
                     return;        
-
                 default:
                     System.out.println("\n Invalid option!");
             }
@@ -445,7 +414,6 @@ public class MainApp {
             System.out.println("\n You already liked this post.");
         }
     }
-
     
     private static void commentPost(User user, Scanner sc) {
 
@@ -477,10 +445,7 @@ public class MainApp {
             System.out.println("\n Failed to add comment.");
         }
     }
-
-
-    
-    
+       
     private static void viewComments(Scanner sc) {
 
         System.out.print("Enter Post ID: ");
@@ -537,8 +502,7 @@ public class MainApp {
             }
         }
     }
-
-    
+   
     private static void followUser( User user, Scanner sc, ConnectionService service, NotificationService notificationService, UserService userService) {
     	
     	ConnectionService connectionService = new ConnectionService();
@@ -565,11 +529,6 @@ public class MainApp {
             System.out.println("\n Already following or request exists.");
         }
     }
-    
-    
-
-    
-
     
     private static void acceptFollow(User user, Scanner sc, 
     		ConnectionService service,NotificationService notificationService,  UserService userService) {
@@ -634,8 +593,6 @@ public class MainApp {
         }
     }
 
-
-    
     private static void viewFollowing(User user, ConnectionService service) {
 
         List<User> following = service.getFollowing(user.getUserId());
@@ -654,7 +611,6 @@ public class MainApp {
             System.out.println("Email : " + u.getEmail());
         }
     }
-
 
     private static void unfollowUser(User user, Scanner sc, ConnectionService service) {
 
@@ -696,7 +652,6 @@ public class MainApp {
             System.out.println("\n You haven't liked this post.");
         }
     }
-
     
     private static void deleteComment(User user, Scanner sc) {
 
@@ -725,5 +680,4 @@ public class MainApp {
             System.out.println("\n Failed to share post.");
         }
     }
-
 }

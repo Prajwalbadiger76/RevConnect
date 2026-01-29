@@ -2,6 +2,8 @@ package com.revconnect.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import com.revconnect.model.Post;
@@ -22,4 +24,11 @@ public class PostServiceTest {
 
         assertTrue(result);
     }
+    
+    @Test
+    void testGetUserPosts() {
+        List<Post> posts = service.getUserPosts(1);
+        assertNotNull(posts);
+    }
+
 }

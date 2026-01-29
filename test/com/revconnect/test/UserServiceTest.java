@@ -35,4 +35,11 @@ public class UserServiceTest {
         assertNotNull(user);
         assertEquals("JUnit User", user.getName());
     }
+    
+    @Test
+    void testLogin_InvalidCredentials() {
+        User user = service.login("wrong@gmail.com", "wrong123");
+        assertNull(user);
+    }
+
 }
