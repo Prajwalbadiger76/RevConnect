@@ -174,5 +174,25 @@ public class ConnectionDAO {
             return false;
         }
     }
+    
+    
+    public boolean acceptRequest(int followerId, int userId) {
+    	
+    	String sql = "UPDATE connections SET status='ACCEPTED' " +
+                "WHERE follower_id=? AND following_id=?";
+    	
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+        	ps.setInt(1, followerId);
+            ps.setInt(2, userId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 
 }

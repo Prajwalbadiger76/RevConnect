@@ -217,7 +217,7 @@ public class MainApp {
                     break;
 
                 case 12:
-                    acceptFollow(user, sc, connectionService);
+                    acceptFollow(user, sc, connectionService, notificationService,userService);
                     break;
                     
                 case 13:
@@ -519,28 +519,48 @@ public class MainApp {
     
 
     
-    private static void acceptFollow(User user, Scanner sc, ConnectionService service) {
+    private static void acceptFollow(User user, Scanner sc, 
+    		ConnectionService service,NotificationService notificationService,  UserService userService) {
+    	
+    	ConnectionService connectionService = new ConnectionService();
+//    	System.out.println("\nPending Requests:");
 
-        List<Integer> pending = service.getPendingRequests(user.getUserId());
-
-        if (pending.isEmpty()) {
-            System.out.println("❌ No pending requests.");
+    	List<Integer> pending = connectionService.getPendingRequests(user.getUserId());
+    	
+    	if (pending.isEmpty()) {
+            System.out.println("No pending requests.");
             return;
         }
 
-        System.out.println("Pending Requests:");
+        System.out.println("\nPending Requests:");
         for (int id : pending) {
-            System.out.println("User ID: " + id);
+            User u = userService.getUserProfile(id);
+            System.out.println("User ID: " + id + " | Name: " + u.getName());
         }
-
+        
         System.out.print("Enter User ID to accept: ");
         int followerId = sc.nextInt();
 
-        if (service.acceptFollow(followerId, user.getUserId())) {
-            System.out.println("✅ Follow request accepted!");
-        } else {
-            System.out.println("❌ Invalid request.");
+        // ✅ VALIDATE INPUT
+        if (!pending.contains(followerId)) {
+            System.out.println("❌ Invalid user selection.");
+            return;
         }
+        
+        boolean accepted = connectionService.acceptFollow(followerId, user.getUserId());
+
+        if (accepted) {
+            System.out.println("✅ Follow request accepted!");
+
+            notificationService.notifyUser(
+                followerId,
+                "Your follow request was accepted",
+                "FOLLOW"
+            );
+        } else {
+            System.out.println("❌ Something went wrong.");
+        }
+        
     }
     
     private static void viewFollowers(User user, ConnectionService service) {
@@ -549,17 +569,19 @@ public class MainApp {
 
         if (followers.isEmpty()) {
             System.out.println("❌ No followers yet.");
-        } else {
-            System.out.println("👥 Your Followers (" + followers.size() + "):");
+            return;
+        }
 
-            for (User u : followers) {
-                System.out.println("----------------------");
-                System.out.println("ID    : " + u.getUserId());
-                System.out.println("Name  : " + u.getName());
-                System.out.println("Email : " + u.getEmail());
-            }
+        System.out.println("👥 Your Followers (" + followers.size() + "):");
+
+        for (User u : followers) {
+            System.out.println("----------------------");
+            System.out.println("ID    : " + u.getUserId());
+            System.out.println("Name  : " + u.getName());
+            System.out.println("Email : " + u.getEmail());
         }
     }
+
 
     
     private static void viewFollowing(User user, ConnectionService service) {
@@ -568,17 +590,19 @@ public class MainApp {
 
         if (following.isEmpty()) {
             System.out.println("❌ You are not following anyone.");
-        } else {
-            System.out.println("➡ You are following (" + following.size() + "):");
+            return;
+        }
 
-            for (User u : following) {
-                System.out.println("----------------------");
-                System.out.println("ID    : " + u.getUserId());
-                System.out.println("Name  : " + u.getName());
-                System.out.println("Email : " + u.getEmail());
-            }
+        System.out.println("➡ You are following (" + following.size() + "):");
+
+        for (User u : following) {
+            System.out.println("----------------------");
+            System.out.println("ID    : " + u.getUserId());
+            System.out.println("Name  : " + u.getName());
+            System.out.println("Email : " + u.getEmail());
         }
     }
+
 
     private static void unfollowUser(User user, Scanner sc, ConnectionService service) {
 

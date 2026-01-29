@@ -13,26 +13,23 @@ public class ConnectionService {
         return dao.followUser(followerId, followingId);
     }
 
-    public boolean acceptFollow(int followerId, int followingId) {
-        return dao.acceptFollow(followerId, followingId);
+    public boolean acceptFollow(int followerId, int userId) {
+        return dao.acceptRequest(followerId, userId);
     }
 
     public List<User> getFollowers(int userId) {
         return dao.getFollowers(userId);
     }
 
-
     public List<User> getFollowing(int userId) {
         return dao.getFollowing(userId);
     }
-    
+
     public List<Integer> getPendingRequests(int userId) {
         return dao.getPendingRequests(userId);
     }
-    
     public boolean unfollowUser(int followerId, int followingId) {
         return dao.unfollowUser(followerId, followingId);
     }
-
 
 }

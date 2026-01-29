@@ -8,17 +8,18 @@ public class NotificationDAO {
 
     public void addNotification(int userId, String message, String category) {
 
-        String sql = "INSERT INTO notifications (user_id, message, category) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO notifications " +
+                     "(user_id, message, category, is_read, created_at) " +
+                     "VALUES (?, ?, ?, 'N', SYSDATE)";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-//            ps.setInt(1, userId);
-//            ps.setString(2, message);
-//            ps.executeUpdate();
             ps.setInt(1, userId);
             ps.setString(2, message);
             ps.setString(3, category);
+
+            ps.executeUpdate(); // ✅ THIS WAS MISSING
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +30,9 @@ public class NotificationDAO {
 
         List<String> list = new ArrayList<>();
 
-        String sql = "SELECT message, category, created_at FROM notifications WHERE user_id=? ORDER BY created_at DESC";
+        String sql = "SELECT message, category, created_at " +
+                     "FROM notifications WHERE user_id=? " +
+                     "ORDER BY created_at DESC";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -39,10 +42,10 @@ public class NotificationDAO {
 
             while (rs.next()) {
                 list.add(
-                		"[" + rs.getString("category") + "] "
-                                + rs.getString("message") +
-                                " (" + rs.getTimestamp("created_at") + ")"
-                		);
+                    "[" + rs.getString("category") + "] " +
+                    rs.getString("message") +
+                    " (" + rs.getTimestamp("created_at") + ")"
+                );
             }
 
         } catch (Exception e) {
@@ -53,7 +56,6 @@ public class NotificationDAO {
     }
 
     public void markAsRead(int userId) {
-
         String sql = "UPDATE notifications SET is_read='Y' WHERE user_id=?";
 
         try (Connection con = DBConnection.getConnection();
@@ -66,11 +68,10 @@ public class NotificationDAO {
             e.printStackTrace();
         }
     }
-    
+
     public int getUnreadCount(int userId) {
 
         String sql = "SELECT COUNT(*) FROM notifications WHERE user_id=? AND is_read='N'";
-        int count = 0;
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -78,55 +79,40 @@ public class NotificationDAO {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                count = rs.getInt(1);
-            }
+            if (rs.next()) return rs.getInt(1);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return count;
+        return 0;
     }
-    
-    
-    public boolean isNotificationEnabled(int userId, String type) {
 
-        String column = "";
+    public boolean isNotificationEnabled(int userId, String category) {
 
-        switch (type) {
-            case "LIKE":
-                column = "like_enabled";
-                break;
-            case "COMMENT":
-                column = "comment_enabled";
-                break;
-            case "FOLLOW":
-                column = "follow_enabled";
-                break;
-            default:
-                return true;
-        }
-
-        String sql = "SELECT " + column + " FROM notification_preferences WHERE user_id = ?";
+        String checkSql = "SELECT COUNT(*) FROM notification_preferences WHERE user_id=?";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(checkSql)) {
 
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return "Y".equalsIgnoreCase(rs.getString(1));
+            if (rs.next() && rs.getInt(1) == 0) {
+                String insert = "INSERT INTO notification_preferences " +
+                                "(user_id, follow_enabled, like_enabled, comment_enabled) " +
+                                "VALUES (?, 'Y', 'Y', 'Y')";
+
+                try (PreparedStatement ps2 = con.prepareStatement(insert)) {
+                    ps2.setInt(1, userId);
+                    ps2.executeUpdate();
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return true; // default allow
+        return true;
     }
-
-
-
 }
