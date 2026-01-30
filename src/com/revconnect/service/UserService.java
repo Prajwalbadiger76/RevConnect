@@ -78,6 +78,11 @@ public class UserService {
     public int getUserIdByName(String name) {
         return userDAO.getUserIdByName(name);
     }
+    
+    public boolean changePassword(int userId, String oldPass, String newPass) {
+        return userDAO.changePassword(userId, oldPass, newPass);
+    }
+
 
 
 }

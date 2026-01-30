@@ -418,21 +418,49 @@ public class MainApp {
         System.out.print("Enter New Bio: ");
         String bio = sc.nextLine();
 
-        System.out.print("Enter User Type: ");
-        String type = sc.nextLine();
+        System.out.print("Enter New Location: ");
+        String location = sc.nextLine();
+
+        System.out.print("Enter Website: ");
+        String website = sc.nextLine();
 
         user.setName(name);
         user.setBio(bio);
-        user.setUserType(type);
+        user.setLocation(location);
+        user.setWebsite(website);
 
         boolean updated = service.updateProfile(user);
 
         if (updated) {
-            System.out.println("\n Profile updated successfully!");
+            System.out.println("✅ Profile updated successfully!");
         } else {
-            System.out.println("\n Failed to update profile!");
+            System.out.println("❌ Failed to update profile!");
+            return;
+        }
+
+        // PASSWORD CHANGE OPTION
+        System.out.print("\nDo you want to change password? (yes/no): ");
+        String choice = sc.nextLine();
+
+        if (choice.equalsIgnoreCase("yes")) {
+
+            System.out.print("Enter current password: ");
+            String oldPass = sc.nextLine();
+
+            System.out.print("Enter new password: ");
+            String newPass = sc.nextLine();
+
+            boolean changed = service.changePassword(
+                    user.getUserId(), oldPass, newPass);
+
+            if (changed) {
+                System.out.println("Password changed successfully!");
+            } else {
+                System.out.println("Incorrect current password.");
+            }
         }
     }
+
     
     // ================= DELETE PROFILE =================
     

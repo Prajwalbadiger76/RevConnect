@@ -185,41 +185,6 @@ public class UserDAO {
         return user;
     }
     
-//    public List<User> searchUsers(String keyword) {
-//
-//        List<User> users = new ArrayList<>();
-//
-//        String sql = "SELECT * FROM users WHERE name LIKE ? OR email LIKE ?";
-//
-//        try (Connection con = DBConnection.getConnection();
-//             PreparedStatement ps = con.prepareStatement(sql)) {
-//
-//            ps.setString(1, "%" + keyword + "%");
-//            ps.setString(2, "%" + keyword + "%");
-//
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                User user = new User();
-//                user.setUserId(rs.getInt("user_id"));
-//                user.setName(rs.getString("name"));
-//                user.setEmail(rs.getString("email"));
-//                user.setBio(rs.getString("bio"));
-//                user.setUserType(rs.getString("user_type"));
-//                user.setProfilePic(rs.getString("profile_pic"));
-//                user.setLocation(rs.getString("location"));
-//                user.setWebsite(rs.getString("website"));
-//
-//                users.add(user);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return users;
-//    }
-    
     public List<User> searchUsers(String keyword) {
 
         List<User> list = new ArrayList<>();
@@ -251,6 +216,39 @@ public class UserDAO {
 
         return list;
     }
+    
+    
+    public boolean changePassword(int userId, String oldPassword, String newPassword) {
+
+        String sql = "SELECT password FROM users WHERE user_id=?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String dbPass = rs.getString("password");
+
+                if (!dbPass.equals(PasswordUtil.hashPassword(oldPassword))) {
+                    return false;
+                }
+            }
+
+            String updateSql = "UPDATE users SET password=? WHERE user_id=?";
+            PreparedStatement ps2 = con.prepareStatement(updateSql);
+            ps2.setString(1, PasswordUtil.hashPassword(newPassword));
+            ps2.setInt(2, userId);
+
+            return ps2.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 
 }
