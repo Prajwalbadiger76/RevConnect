@@ -1,7 +1,6 @@
-🛠️ RevConnect – Setup Instructions
+#🛠️ RevConnect – Setup Instructions
 
-GitHub Repository:
-🔗 https://github.com/Prajwalbadiger76/RevConnect.git
+##GitHub Repository: https://github.com/Prajwalbadiger76/RevConnect.git
 
 📌 Project Overview
 
