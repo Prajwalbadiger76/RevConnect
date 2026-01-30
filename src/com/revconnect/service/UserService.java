@@ -17,14 +17,14 @@ public class UserService {
     // ================= REGISTER =================
     public boolean register(User user) {
 
-        logger.info("Attempting to register user: " + user.getEmail());
+//        logger.info("Attempting to register user: " + user.getEmail());
 
         boolean result = userDAO.registerUser(user);
 
         if (result) {
-            logger.info("User registered successfully: " + user.getEmail());
+//            logger.info("User registered successfully: " + user.getEmail());
         } else {
-            logger.error("User registration failed for: " + user.getEmail());
+//            logger.error("User registration failed for: " + user.getEmail());
         }
 
         return result;
@@ -33,14 +33,14 @@ public class UserService {
     // ================= LOGIN =================
     public User login(String email, String password) {
 
-        logger.info("Login attempt for email: " + email);
+//        logger.info("Login attempt for email: " + email);
 
         User user = userDAO.login(email, password);
 
         if (user != null) {
-            logger.info("Login successful for: " + email);
+//            logger.info("Login successful for: " + email);
         } else {
-            logger.warn("Login failed for: " + email);
+//            logger.warn("Login failed for: " + email);
         }
 
         return user;
@@ -62,14 +62,14 @@ public class UserService {
     // ================= UPDATE PROFILE =================
     public boolean updateProfile(User user) {
 
-        logger.info("Updating profile for user ID: " + user.getUserId());
+//        logger.info("Updating profile for user ID: " + user.getUserId());
 
         boolean updated = userDAO.updateProfile(user);
 
         if (updated) {
-            logger.info("Profile updated successfully for user ID: " + user.getUserId());
+//            logger.info("Profile updated successfully for user ID: " + user.getUserId());
         } else {
-            logger.error("Failed to update profile for user ID: " + user.getUserId());
+//            logger.error("Failed to update profile for user ID: " + user.getUserId());
         }
 
         return updated;
@@ -82,6 +82,24 @@ public class UserService {
     public boolean changePassword(int userId, String oldPass, String newPass) {
         return userDAO.changePassword(userId, oldPass, newPass);
     }
+    
+    public boolean resetPassword(String email, String answer, String newPassword) {
+        return userDAO.resetPassword(email, answer, newPassword);
+    }
+    
+    public boolean emailExists(String email) {
+        return userDAO.emailExists(email);
+    }
+
+    public String getSecurityQuestion(String email) {
+        return userDAO.getSecurityQuestion(email);
+    }
+
+    public boolean setSecurityQuestion(String email, String q, String a) {
+        return userDAO.setSecurityQuestion(email, q, a);
+    }
+
+
 
 
 

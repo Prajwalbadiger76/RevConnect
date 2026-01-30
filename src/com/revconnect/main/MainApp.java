@@ -109,14 +109,12 @@ public class MainApp {
 
 
     // ================= LOGIN FLOW =================
-
+	
 	private static void loginFlow(UserService service, Scanner sc) {
-		
-		System.out.println("\n==== LOGIN ====\n");
 
-	    boolean loggedIn = false;
+	    System.out.println("\n==== LOGIN ====\n");
 
-	    while (!loggedIn) {
+	    while (true) {
 
 	        System.out.print("Enter Email: ");
 	        String email = sc.nextLine();
@@ -129,20 +127,35 @@ public class MainApp {
 	        if (loggedUser != null) {
 	            System.out.println("\n Login Successful!");
 	            showProfileMenu(loggedUser, service, sc);
-	            loggedIn = true;
-	        } else {
-	            System.out.println("Invalid email or password!");
+	            return; // exit login flow
+	        }
 
-	            System.out.println("1. Try Again");
-	            System.out.println("2. Back to Main Menu");
-	            System.out.print("Choose option: ");
+	        // ❌ Login failed
+	        System.out.println("\n Invalid email or password!");
 
-	            String retry = sc.nextLine();
+	        System.out.println("\n1. Try Again");
+	        System.out.println("2. Forgot Password");
+	        System.out.println("3. Back to Main Menu");
+	        System.out.print("Choose option: ");
 
-	            if (retry.equals("2")) {
-	            	System.out.println("\n Returning to main menu...\n");
-	                return; // go back to main menu
-	            }
+	        String choice = sc.nextLine();
+
+	        switch (choice) {
+
+	            case "1":
+	                // Loop continues automatically
+	                break;
+
+	            case "2":
+	                handleForgotPassword(service, sc);
+	                break;
+
+	            case "3":
+	                System.out.println("\n↩ Returning to main menu...\n");
+	                return;
+
+	            default:
+	                System.out.println("❌ Invalid option. Please choose 1, 2 or 3.");
 	        }
 	    }
 	}
@@ -879,7 +892,7 @@ public class MainApp {
         List<Post> posts = postService.searchPostsByHashtag(tag);
 
         if (posts.isEmpty()) {
-            System.out.println("❌ No posts found for #" + tag);
+            System.out.println(" No posts found for #" + tag);
             return;
         }
 
@@ -892,6 +905,79 @@ public class MainApp {
             System.out.println("Content : " + p.getContent());
             System.out.println("Tags    : " + p.getHashtags());
             System.out.println("Date    : " + p.getCreatedAt());
+        }
+    }
+    
+    private static void forgotPasswordFlow(UserService service, Scanner sc) {
+
+        System.out.print("Enter registered email: ");
+        String email = sc.nextLine();
+
+        System.out.print("Answer security question: ");
+        String answer = sc.nextLine();
+
+        System.out.print("Enter new password: ");
+        String newPass = sc.nextLine();
+
+        boolean success = service.resetPassword(email, answer, newPass);
+
+        if (success) {
+            System.out.println("Password reset successful!");
+        } else {
+            System.out.println("Incorrect answer or email.");
+        }
+    }
+    
+    private static void handleForgotPassword(UserService service, Scanner sc) {
+
+        System.out.print("\nEnter registered email: ");
+        String email = sc.nextLine();
+
+        // Step 1: Check email exists
+        if (!service.emailExists(email)) {
+            System.out.println("❌ Email not found.");
+            return;
+        }
+
+        // Step 2: Check if security question exists
+        String question = service.getSecurityQuestion(email);
+
+        if (question == null || question.trim().isEmpty()) {
+
+            System.out.println("\nSecurity question not set.");
+            System.out.println("Please set it now.");
+
+            System.out.print("Enter Security Question: ");
+            String newQ = sc.nextLine();
+
+            System.out.print("Enter Answer: ");
+            String newA = sc.nextLine();
+
+            boolean saved = service.setSecurityQuestion(email, newQ, newA);
+
+            if (!saved) {
+                System.out.println(" Failed to save security question.");
+                return;
+            }
+
+            System.out.println(" Security question saved successfully!");
+            question = newQ;
+        }
+
+        // Step 3: Ask question
+        System.out.println("\nSecurity Question: " + question);
+        System.out.print("Enter Security Answer: ");
+        String answer = sc.nextLine();
+
+        System.out.print("Enter New Password: ");
+        String newPassword = sc.nextLine();
+
+        boolean updated = service.resetPassword(email, answer, newPassword);
+
+        if (updated) {
+            System.out.println(" Password reset successful!");
+        } else {
+            System.out.println(" Incorrect answer. Password not changed.");
         }
     }
 

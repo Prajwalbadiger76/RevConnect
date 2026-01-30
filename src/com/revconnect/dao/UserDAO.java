@@ -249,6 +249,105 @@ public class UserDAO {
         return false;
     }
 
+    
+    
+    public boolean resetPassword(String email, String answer, String newPassword) {
+
+        String sql = "SELECT security_answer FROM users WHERE email = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                String storedAnswer = rs.getString("security_answer");
+
+                // 🔐 Compare properly
+                if (!storedAnswer.equalsIgnoreCase(answer.trim())) {
+                    return false;
+                }
+
+                // Update password
+                String updateSql =
+                    "UPDATE users SET password=? WHERE email=?";
+
+                try (PreparedStatement ps2 = con.prepareStatement(updateSql)) {
+                    ps2.setString(1, PasswordUtil.hashPassword(newPassword));
+                    ps2.setString(2, email);
+                    return ps2.executeUpdate() > 0;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    
+    public String getSecurityQuestion(String email) {
+
+        String sql = "SELECT security_question FROM users WHERE email = ?";
+        
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("security_question"); // may be NULL
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public boolean setSecurityQuestion(String email, String question, String answer) {
+
+        String sql = "UPDATE users SET security_question=?, security_answer=? WHERE email=?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, question);
+            ps.setString(2, answer);
+            ps.setString(3, email);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    
+    public boolean emailExists(String email) {
+
+        String sql = "SELECT 1 FROM users WHERE email = ?";
+        
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 
 }
