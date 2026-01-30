@@ -1,87 +1,59 @@
-🛠️ RevConnect – Setup Instructions
+===============================
+REVCONNECT – SETUP INSTRUCTIONS
+===============================
 
-GitHub Repository: https://github.com/Prajwalbadiger76/RevConnect.git
+GitHub Repository:
+https://github.com/Prajwalbadiger76/RevConnect
 
-📌 Project Overview
+--------------------------------
+1. SYSTEM REQUIREMENTS
+--------------------------------
+• Java JDK 8 or above
+• Oracle XE Database
+• Eclipse / STS IDE
+• ojdbc6.jar
+• Git (optional)
 
-RevConnect is a console-based social media application built using:
-
-Java (Core + JDBC)
-
-Oracle Database
-
-JUnit Testing
-
-Log4j Logging
-
-It supports:
-
-User registration & login
-
-Post creation
-
-Like / Comment
-
-Follow system
-
-Notifications
-
-Profile management
-
-✅ Prerequisites
-
-Make sure you have the following installed:
-
-Tool	Required
-Java	JDK 8 or above
-IDE	Eclipse / STS
-Database	Oracle XE
-JDBC Driver	ojdbc6.jar
-Git	Optional
-📥 Step 1: Clone the Project
+--------------------------------
+2. CLONE THE PROJECT
+--------------------------------
 git clone https://github.com/Prajwalbadiger76/RevConnect.git
 
+--------------------------------
+3. IMPORT PROJECT IN ECLIPSE
+--------------------------------
+1. Open Eclipse
+2. File → Import
+3. Existing Projects into Workspace
+4. Select project folder
+5. Finish
 
-OR
-Download ZIP → Extract → Open in Eclipse
+--------------------------------
+4. ADD JDBC DRIVER
+--------------------------------
+1. Right click project
+2. Build Path → Configure Build Path
+3. Libraries → Add External JAR
+4. Select ojdbc6.jar
+5. Apply and Close
 
-🧩 Step 2: Import Project into Eclipse
+(Note: Add to Classpath, NOT Modulepath)
 
-Open Eclipse / STS
+--------------------------------
+5. DATABASE SETUP
+--------------------------------
 
-Click File → Import
-
-Select Existing Projects into Workspace
-
-Browse the extracted folder
-
-Click Finish
-
-🔌 Step 3: Add JDBC Driver
-
-Right-click project → Build Path
-
-Click Configure Build Path
-
-Go to Libraries
-
-Click Add External JAR
-
-Select:
-
-ojdbc6.jar
-
-
-Apply & Close
-
-✅ Add to Classpath (NOT Modulepath)
-
-🗄️ Step 4: Database Setup
-Create User
+Create User:
+---------------
 CREATE USER revconnect IDENTIFIED BY revconnect;
 GRANT CONNECT, RESOURCE TO revconnect;
 
-Create Tables
+--------------------------------
+Create Tables:
+--------------------------------
+
+USERS
+-----
 CREATE TABLE users (
     user_id NUMBER PRIMARY KEY,
     name VARCHAR2(100),
@@ -95,6 +67,8 @@ CREATE TABLE users (
     created_at DATE DEFAULT SYSDATE
 );
 
+POSTS
+-----
 CREATE TABLE posts (
     post_id NUMBER PRIMARY KEY,
     user_id NUMBER,
@@ -104,6 +78,8 @@ CREATE TABLE posts (
     created_at DATE DEFAULT SYSDATE
 );
 
+COMMENTS
+--------
 CREATE TABLE comments (
     comment_id NUMBER PRIMARY KEY,
     post_id NUMBER,
@@ -112,6 +88,8 @@ CREATE TABLE comments (
     commented_at DATE DEFAULT SYSDATE
 );
 
+LIKES
+-----
 CREATE TABLE post_likes (
     like_id NUMBER PRIMARY KEY,
     post_id NUMBER,
@@ -119,6 +97,8 @@ CREATE TABLE post_likes (
     liked_at DATE DEFAULT SYSDATE
 );
 
+CONNECTIONS
+-----------
 CREATE TABLE connections (
     connection_id NUMBER PRIMARY KEY,
     follower_id NUMBER,
@@ -127,6 +107,8 @@ CREATE TABLE connections (
     created_at DATE DEFAULT SYSDATE
 );
 
+NOTIFICATIONS
+-------------
 CREATE TABLE notifications (
     notification_id NUMBER PRIMARY KEY,
     user_id NUMBER,
@@ -136,6 +118,8 @@ CREATE TABLE notifications (
     created_at DATE DEFAULT SYSDATE
 );
 
+NOTIFICATION PREFERENCES
+------------------------
 CREATE TABLE notification_preferences (
     user_id NUMBER PRIMARY KEY,
     follow_enabled CHAR(1),
@@ -143,51 +127,54 @@ CREATE TABLE notification_preferences (
     comment_enabled CHAR(1)
 );
 
-⚙️ Step 5: Configure Database Connection
+--------------------------------
+6. DATABASE CONNECTION
+--------------------------------
+File: DBConnection.java
 
-📁 File: DBConnection.java
+Update credentials:
 
-public class DBConnection {
-    public static Connection getConnection() throws Exception {
-        return DriverManager.getConnection(
-            "jdbc:oracle:thin:@localhost:1521:XE",
-            "revconnect",
-            "revconnect"
-        );
-    }
-}
+jdbc:oracle:thin:@localhost:1521:XE
+Username: revconnect
+Password: revconnect
 
-▶ Step 6: Run the Application
+--------------------------------
+7. RUN APPLICATION
+--------------------------------
+1. Open MainApp.java
+2. Right click → Run As → Java Application
+3. Choose:
+   1 → Register
+   2 → Login
 
-Open:
-
-MainApp.java
-
-
-Right-click → Run As → Java Application
-
-Console menu appears:
-
-==== RevConnect ====
-1. Register
-2. Login
-3. Exit
-
-🧪 Step 7: Run JUnit Tests
-
-📁 Path:
-
+--------------------------------
+8. RUN JUNIT TESTS
+--------------------------------
+Path:
 src/test/java/com/revconnect/test
 
+Right click test file → Run As → JUnit Test
 
-Run:
+--------------------------------
+9. FEATURES IMPLEMENTED
+--------------------------------
+✔ User Registration & Login  
+✔ Profile Management  
+✔ Post Creation  
+✔ Like & Comment  
+✔ Follow / Unfollow  
+✔ Notifications  
+✔ Search Users  
+✔ JUnit Testing  
 
-UserServiceTest
+--------------------------------
+10. NOTES
+--------------------------------
+• Use valid email while registering
+• Database must be running before app execution
+• Do not delete triggers or sequences
+• Notifications appear after follow/like/comment actions
 
-PostServiceTest
-
-ConnectionServiceTest
-
-NotificationServiceTest
-
-✔ Right-click → Run as → JUnit Test
+--------------------------------
+END OF SETUP
+--------------------------------
