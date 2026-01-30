@@ -184,6 +184,36 @@ public class PostDAO {
         return list;
     }
 
+    public List<Post> searchPostsByHashtag(String hashtag) {
+
+        List<Post> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM posts WHERE LOWER(hashtags) LIKE ? ORDER BY created_at DESC";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + hashtag.toLowerCase() + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Post p = new Post();
+                p.setPostId(rs.getInt("post_id"));
+                p.setUserId(rs.getInt("user_id"));
+                p.setContent(rs.getString("content"));
+                p.setHashtags(rs.getString("hashtags"));
+                p.setCreatedAt(rs.getTimestamp("created_at"));
+
+                list.add(p);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 
 
 

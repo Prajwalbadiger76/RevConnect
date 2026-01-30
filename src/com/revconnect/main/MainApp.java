@@ -195,30 +195,31 @@ public class MainApp {
             System.out.println("3. View Feed (All Posts)");
             System.out.println("4. Create Post");
             System.out.println("5. View My Posts");
-            System.out.println("6. Delete Post");
-            System.out.println("7. Like Post");
-            System.out.println("8. Comment on Post");
-            System.out.println("9. View Comments");
-            System.out.println("10. View Like Count");
-            System.out.println("11. Search User");
-            System.out.println("12. Follow User");
-            System.out.println("13. Accept Follow Request");
-            System.out.println("14. View Followers");
-            System.out.println("15. View Following");
-            System.out.println("16. Unfollow User");
-            System.out.println("17. View Notifications");
-            System.out.println("18. Unlike Post");
-            System.out.println("19. Delete Comment");
-            System.out.println("20. Share Post");
-            System.out.println("21. Send Message");
-            System.out.println("22. View Messages");
-            System.out.println("23. Delete Chat");
-            System.out.println("24. Block User");
-            System.out.println("25. Logout");
+            System.out.println("6. Search Posts by Hashtag");
+            System.out.println("7. Delete Post");
+            System.out.println("8. Like Post");
+            System.out.println("9. Comment on Post");
+            System.out.println("10. View Comments");
+            System.out.println("11. View Like Count");
+            System.out.println("12. Search User");
+            System.out.println("13. Follow User");
+            System.out.println("14. Accept Follow Request");
+            System.out.println("15. View Followers");
+            System.out.println("16. View Following");
+            System.out.println("17. Unfollow User");
+            System.out.println("18. View Notifications");
+            System.out.println("19. Unlike Post");
+            System.out.println("20. Delete Comment");
+            System.out.println("21. Share Post");
+            System.out.println("22. Send Message");
+            System.out.println("23. View Messages");
+            System.out.println("24. Delete Chat");
+            System.out.println("25. Block User");
+            System.out.println("26. Logout");
 
             System.out.print("Choose option: ");
 
-            int option = getValidChoice(sc, 1, 25);
+            int option = getValidChoice(sc, 1, 26);
 
             switch (option) {
 
@@ -240,63 +241,67 @@ public class MainApp {
                     viewMyPosts(user, postService);
                     break;
                 case 6:
+                    searchPostsByHashtag(sc, postService);
+                    break;
+
+                case 7:
                     deletePost(user, postService, sc);
                     break;        
-                case 7:
+                case 8:
                     likePost(user, sc);
                     break;
-                case 8:
+                case 9:
                     commentPost(user, sc);
                     break;    
-                case 9:
+                case 10:
                     viewComments(sc);
                     break;   
-                case 10:
+                case 11:
                     viewLikeCount(sc);
                     break;
-                case 11:
+                case 12:
                     searchUser(service, sc);
                     break;                    
-                case 12:
+                case 13:
                 	followUser(user, sc, connectionService, notificationService, userService);
                     break;
-                case 13:
+                case 14:
                     acceptFollow(user, sc, connectionService, notificationService,userService);
                     break;                   
-                case 14:
+                case 15:
                     viewFollowers(user, connectionService);
                     break;
-                case 15:
+                case 16:
                     viewFollowing(user, connectionService);
                     break;
-                case 16:
+                case 17:
                     unfollowUser(user, sc, connectionService);
                     break;                  
-                case 17:
+                case 18:
                     viewNotifications(user, notificationService);
                     break;
-                case 18:
+                case 19:
                     unlikePost(user, sc);
                     break;
-                case 19:
+                case 20:
                     deleteComment(user, sc);
                     break;
-                case 20:
+                case 21:
                     sharePost(user, sc);
                     break;
-                case 21:
+                case 22:
                     sendMessage(user, sc);
                     break;
 
-                case 22:
+                case 23:
                     viewMessages(user, sc);
                     break;
 
-                case 23:
+                case 24:
                     deleteChat(user, sc);
                     break;
                     
-                case 24:
+                case 25:
                     System.out.print("Enter User ID to block: ");
                     int blockedId = sc.nextInt();
 
@@ -309,7 +314,7 @@ public class MainApp {
                     }
                     break;
 
-                case 25:
+                case 26:
                     System.out.println("\n Logged out successfully.");
                     return;        
                 default:
@@ -834,6 +839,33 @@ public class MainApp {
         }
     }
 
+    private static void searchPostsByHashtag(Scanner sc, PostService postService) {
+
+        System.out.print("Enter hashtag (without # or with #): ");
+        String tag = sc.nextLine();
+
+        if (tag.startsWith("#")) {
+            tag = tag.substring(1);
+        }
+
+        List<Post> posts = postService.searchPostsByHashtag(tag);
+
+        if (posts.isEmpty()) {
+            System.out.println("❌ No posts found for #" + tag);
+            return;
+        }
+
+        System.out.println("\n===== POSTS WITH #" + tag + " =====");
+
+        for (Post p : posts) {
+            System.out.println("----------------------------");
+            System.out.println("Post ID : " + p.getPostId());
+            System.out.println("User ID : " + p.getUserId());
+            System.out.println("Content : " + p.getContent());
+            System.out.println("Tags    : " + p.getHashtags());
+            System.out.println("Date    : " + p.getCreatedAt());
+        }
+    }
 
 
 }

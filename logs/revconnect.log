@@ -321,3 +321,5 @@
 2026-01-30 13:52:16 [INFO] com.revconnect.service.UserService - Login successful for: john@gmail.com
 2026-01-30 13:55:23 [INFO] com.revconnect.service.UserService - Login attempt for email: userx@gmail.com
 2026-01-30 13:55:23 [INFO] com.revconnect.service.UserService - Login successful for: userx@gmail.com
+2026-01-30 13:58:59 [INFO] com.revconnect.service.UserService - Login attempt for email: userx@gmail.com
+2026-01-30 13:59:00 [INFO] com.revconnect.service.UserService - Login successful for: userx@gmail.com

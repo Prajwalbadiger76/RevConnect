@@ -81,6 +81,10 @@ public class PostService {
     public List<Post> getAllPosts() {
         return postDAO.getAllPosts();
     }
+    
+    public List<Post> searchPostsByHashtag(String hashtag) {
+        return postDAO.searchPostsByHashtag(hashtag);
+    }
 
 
 
