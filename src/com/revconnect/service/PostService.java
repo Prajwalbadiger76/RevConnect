@@ -77,6 +77,11 @@ public class PostService {
     public boolean sharePost(int userId, int postId) {
         return postDAO.sharePost(userId, postId);
     }
+    
+    public List<Post> getAllPosts() {
+        return postDAO.getAllPosts();
+    }
+
 
 
 }

@@ -1,11 +1,15 @@
 package com.revconnect.model;
 
+import java.sql.Timestamp;
+
 public class Post {
 
     private int postId;
     private int userId;
     private String content;
     private String hashtags;
+    private Timestamp createdAt;
+
 
 
     // Getters and Setters
@@ -41,5 +45,14 @@ public class Post {
     public void setHashtags(String hashtags) {
         this.hashtags = hashtags;
     }
+    
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
 
 }

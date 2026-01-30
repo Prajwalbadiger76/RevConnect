@@ -189,28 +189,29 @@ public class MainApp {
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
-            System.out.println("3. Create Post");
-            System.out.println("4. View My Posts");
-            System.out.println("5. Delete Post");
-            System.out.println("6. Like Post");
-            System.out.println("7. Comment on Post");
-            System.out.println("8. View Comments");
-            System.out.println("9. View Like Count");
-            System.out.println("10. Search User");
-            System.out.println("11. Follow User");
-            System.out.println("12. Accept Follow Request");
-            System.out.println("13. View Followers");
-            System.out.println("14. View Following");
-            System.out.println("15. Unfollow User");
-            System.out.println("16. View Notifications");
-            System.out.println("17. Unlike Post");
-            System.out.println("18. Delete Comment");
-            System.out.println("19. Share Post");
-            System.out.println("20. Logout");
+            System.out.println("3. View Feed (All Posts)");
+            System.out.println("4. Create Post");
+            System.out.println("5. View My Posts");
+            System.out.println("6. Delete Post");
+            System.out.println("7. Like Post");
+            System.out.println("8. Comment on Post");
+            System.out.println("9. View Comments");
+            System.out.println("10. View Like Count");
+            System.out.println("11. Search User");
+            System.out.println("12. Follow User");
+            System.out.println("13. Accept Follow Request");
+            System.out.println("14. View Followers");
+            System.out.println("15. View Following");
+            System.out.println("16. Unfollow User");
+            System.out.println("17. View Notifications");
+            System.out.println("18. Unlike Post");
+            System.out.println("19. Delete Comment");
+            System.out.println("20. Share Post");
+            System.out.println("21. Logout");
 
             System.out.print("Choose option: ");
 
-            int option = getValidChoice(sc, 1, 20);
+            int option = getValidChoice(sc, 1, 21);
 
             switch (option) {
 
@@ -222,57 +223,61 @@ public class MainApp {
                     editProfile(user, service, sc);
                     break;
                 case 3:
+                    viewFeed(user, sc);
+                    break;
+
+                case 4:
                     createPost(user, postService, sc);
                     break;
-                case 4:
+                case 5:
                     viewMyPosts(user, postService);
                     break;
-                case 5:
+                case 6:
                     deletePost(user, postService, sc);
                     break;        
-                case 6:
+                case 7:
                     likePost(user, sc);
                     break;
-                case 7:
+                case 8:
                     commentPost(user, sc);
                     break;    
-                case 8:
+                case 9:
                     viewComments(sc);
                     break;   
-                case 9:
+                case 10:
                     viewLikeCount(sc);
                     break;
-                case 10:
+                case 11:
                     searchUser(service, sc);
                     break;                    
-                case 11:
+                case 12:
                 	followUser(user, sc, connectionService, notificationService, userService);
                     break;
-                case 12:
+                case 13:
                     acceptFollow(user, sc, connectionService, notificationService,userService);
                     break;                   
-                case 13:
+                case 14:
                     viewFollowers(user, connectionService);
                     break;
-                case 14:
+                case 15:
                     viewFollowing(user, connectionService);
                     break;
-                case 15:
+                case 16:
                     unfollowUser(user, sc, connectionService);
                     break;                  
-                case 16:
+                case 17:
                     viewNotifications(user, notificationService);
                     break;
-                case 17:
+                case 18:
                     unlikePost(user, sc);
                     break;
-                case 18:
+                case 19:
                     deleteComment(user, sc);
                     break;
-                case 19:
+                case 20:
                     sharePost(user, sc);
                     break;
-                case 20:
+                case 21:
                     System.out.println("\n Logged out successfully.");
                     return;        
                 default:
@@ -325,6 +330,32 @@ public class MainApp {
             System.out.println("Content : " + post.getContent());
         }
     }
+    
+    private static void viewFeed(User user, Scanner sc) {
+
+        PostService postService = new PostService();
+        List<Post> posts = postService.getAllPosts();
+
+        if (posts.isEmpty()) {
+            System.out.println("\n No posts available.");
+            return;
+        }
+
+        System.out.println("\n========= FEED =========");
+
+        for (Post post : posts) {
+            System.out.println("---------------------------------");
+            System.out.println("Post ID   : " + post.getPostId());
+            System.out.println("User ID   : " + post.getUserId());
+            System.out.println("Content   : " + post.getContent());
+            System.out.println("Hashtags  : " + post.getHashtags());
+            System.out.println("Posted On : " + post.getCreatedAt());
+        }
+
+        System.out.println("---------------------------------");
+        System.out.println("You can like or comment using Post ID");
+    }
+
 
     // ================= PROFILE DISPLAY =================
 

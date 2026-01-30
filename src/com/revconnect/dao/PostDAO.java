@@ -155,6 +155,35 @@ public class PostDAO {
             return false;
         }
     }
+    
+    public List<Post> getAllPosts() {
+
+        List<Post> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM posts ORDER BY created_at DESC";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Post post = new Post();
+                post.setPostId(rs.getInt("post_id"));
+                post.setUserId(rs.getInt("user_id"));
+                post.setContent(rs.getString("content"));
+                post.setHashtags(rs.getString("hashtags"));
+                post.setCreatedAt(rs.getTimestamp("created_at"));
+
+                list.add(post);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 
 
 

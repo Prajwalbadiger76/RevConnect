@@ -293,3 +293,23 @@
 2026-01-29 16:11:15 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 16
 2026-01-29 16:11:15 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
 2026-01-29 16:11:15 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-01-30 12:17:52 [INFO] com.revconnect.service.UserService - Login attempt for email: userx@gmail.com
+2026-01-30 12:17:53 [INFO] com.revconnect.service.UserService - Login successful for: userx@gmail.com
+2026-01-30 12:18:36 [INFO] com.revconnect.service.LikeService - User 32 attempting to like post 1
+2026-01-30 12:18:36 [INFO] com.revconnect.service.LikeService - Post 1 liked successfully by user 32
+2026-01-30 12:18:43 [INFO] com.revconnect.service.LikeService - User 32 attempting to like post 1
+2026-01-30 12:18:43 [WARN] com.revconnect.service.LikeService - Duplicate like attempt by user 32 on post 1
+2026-01-30 12:19:10 [INFO] com.revconnect.service.CommentService - User 32 attempting to comment on post 1
+2026-01-30 12:19:10 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-01-30 12:19:18 [INFO] com.revconnect.service.CommentService - User 32 attempting to comment on post 1
+2026-01-30 12:19:18 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-01-30 12:19:51 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-01-30 12:19:51 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 20
+2026-01-30 12:20:59 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 32
+2026-01-30 12:20:59 [INFO] com.revconnect.service.PostService - Total posts found for user 32: 0
+2026-01-30 12:22:46 [INFO] com.revconnect.service.UserService - Login attempt for email: User1
+2026-01-30 12:22:46 [WARN] com.revconnect.service.UserService - Login failed for: User1
+2026-01-30 12:23:00 [INFO] com.revconnect.service.UserService - Login attempt for email: user1@gmail.com
+2026-01-30 12:23:00 [INFO] com.revconnect.service.UserService - Login successful for: user1@gmail.com
+2026-01-30 12:23:08 [INFO] com.revconnect.service.UserService - Fetching profile for user ID: 22
+2026-01-30 12:23:08 [INFO] com.revconnect.service.UserService - Fetching profile for user ID: 31
