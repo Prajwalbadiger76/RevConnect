@@ -3,10 +3,12 @@ package com.revconnect.main;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revconnect.model.Message;
 import com.revconnect.model.Post;
 import com.revconnect.model.User;
 import com.revconnect.service.CommentService;
 import com.revconnect.service.LikeService;
+import com.revconnect.service.MessageService;
 import com.revconnect.service.NotificationService;
 import com.revconnect.service.PostService;
 import com.revconnect.service.UserService;
@@ -180,6 +182,7 @@ public class MainApp {
         ConnectionService connectionService = new ConnectionService();
         NotificationService notificationService = new NotificationService();
         UserService userService = new UserService();
+        MessageService messageService = new MessageService();
 
         while (true) {
         	int unread = notificationService.getUnreadCount(user.getUserId());
@@ -207,11 +210,15 @@ public class MainApp {
             System.out.println("18. Unlike Post");
             System.out.println("19. Delete Comment");
             System.out.println("20. Share Post");
-            System.out.println("21. Logout");
+            System.out.println("21. Send Message");
+            System.out.println("22. View Messages");
+            System.out.println("23. Delete Chat");
+            System.out.println("24. Block User");
+            System.out.println("25. Logout");
 
             System.out.print("Choose option: ");
 
-            int option = getValidChoice(sc, 1, 21);
+            int option = getValidChoice(sc, 1, 25);
 
             switch (option) {
 
@@ -278,6 +285,31 @@ public class MainApp {
                     sharePost(user, sc);
                     break;
                 case 21:
+                    sendMessage(user, sc);
+                    break;
+
+                case 22:
+                    viewMessages(user, sc);
+                    break;
+
+                case 23:
+                    deleteChat(user, sc);
+                    break;
+                    
+                case 24:
+                    System.out.print("Enter User ID to block: ");
+                    int blockedId = sc.nextInt();
+
+                    boolean blocked = messageService.blockUser(user.getUserId(), blockedId);
+
+                    if (blocked) {
+                        System.out.println("User blocked successfully.");
+                    } else {
+                        System.out.println("Unable to block user (already blocked or invalid).");
+                    }
+                    break;
+
+                case 25:
                     System.out.println("\n Logged out successfully.");
                     return;        
                 default:
@@ -711,4 +743,97 @@ public class MainApp {
             System.out.println("\n Failed to share post.");
         }
     }
+    
+    private static void sendMessage(User user, Scanner sc) {
+        MessageService service = new MessageService();
+
+        System.out.print("Enter Receiver User ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter message: ");
+        String msg = sc.nextLine();
+
+        if (service.sendMessage(user.getUserId(), id, msg)) {
+            System.out.println("Message sent");
+        } else {
+            System.out.println("Failed to send message");
+        }
+    }
+
+    private static void viewMessages(User user, Scanner sc) {
+
+        MessageService messageService = new MessageService();
+
+        System.out.print("Enter User ID to view chat: ");
+        int otherUserId = sc.nextInt();
+        sc.nextLine();
+
+        List<Message> messages = messageService.getMessagesBetweenUsers(
+                user.getUserId(), otherUserId
+        );
+
+        if (messages.isEmpty()) {
+            System.out.println("No messages found.");
+            return;
+        }
+
+        System.out.println("\n Chat History:");
+        for (Message m : messages) {
+            String sender =
+                    (m.getSenderId() == user.getUserId()) ? "You" : "User " + m.getSenderId();
+
+            System.out.println(
+                    "[" + m.getCreatedAt() + "] " +
+                    sender + ": " + m.getMessage()
+            );
+        }
+
+        // Mark messages as read
+        messageService.markMessagesAsRead(user.getUserId(), otherUserId);
+    }
+
+
+    private static void deleteChat(User user, Scanner sc) {
+
+        MessageService messageService = new MessageService();
+
+        System.out.print("Enter User ID to delete chat: ");
+        int otherUserId = sc.nextInt();
+        sc.nextLine();
+
+        boolean deleted = messageService.deleteConversation(
+                user.getUserId(),
+                otherUserId
+        );
+
+        if (deleted) {
+            System.out.println("Chat deleted successfully.");
+        } else {
+            System.out.println("No chat found to delete.");
+        }
+    }
+
+    private static void blockUser(User user, Scanner sc) {
+
+        MessageService messageService = new MessageService();
+
+        System.out.print("Enter User ID to block: ");
+        int blockUserId = sc.nextInt();
+        sc.nextLine();
+
+        boolean blocked = messageService.blockUser(
+                user.getUserId(),
+                blockUserId
+        );
+
+        if (blocked) {
+            System.out.println("User blocked successfully.");
+        } else {
+            System.out.println("Unable to block user.");
+        }
+    }
+
+
+
 }
