@@ -1,6 +1,5 @@
-===============================
 REVCONNECT – SETUP INSTRUCTIONS
-===============================
+
 
 GitHub Repository:
 https://github.com/Prajwalbadiger76/RevConnect
