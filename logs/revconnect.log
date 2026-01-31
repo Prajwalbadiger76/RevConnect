@@ -333,3 +333,19 @@
 2026-01-30 14:43:58 [INFO] com.revconnect.service.UserService - Login successful for: user2@gmail.com
 2026-01-30 14:45:07 [INFO] com.revconnect.service.UserService - Login attempt for email: user2@gmail.com
 2026-01-30 14:45:07 [WARN] com.revconnect.service.UserService - Login failed for: user2@gmail.com
+2026-01-30 15:32:48 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-01-30 15:32:48 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-01-30 15:32:48 [INFO] com.revconnect.service.PostService - Creating post for user ID: 1
+2026-01-30 15:32:48 [INFO] com.revconnect.service.PostService - Post created successfully for user ID: 1
+2026-01-30 15:32:48 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-01-30 15:32:48 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 35
+2026-01-30 15:32:48 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 35
+2026-01-30 15:32:49 [INFO] com.revconnect.service.LikeService - Post 35 liked successfully by user 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.PostService - Creating post for user ID: 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.PostService - Post created successfully for user ID: 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 31
+2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 20
+2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1

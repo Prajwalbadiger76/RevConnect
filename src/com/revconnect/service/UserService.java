@@ -2,105 +2,65 @@ package com.revconnect.service;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.revconnect.dao.UserDAO;
 import com.revconnect.model.User;
 
 public class UserService {
 
-    private static final Logger logger = LogManager.getLogger(UserService.class);
-
-    private UserDAO userDAO = new UserDAO();
+    private UserDAO dao = new UserDAO();
 
     // ================= REGISTER =================
     public boolean register(User user) {
-
-//        logger.info("Attempting to register user: " + user.getEmail());
-
-        boolean result = userDAO.registerUser(user);
-
-        if (result) {
-//            logger.info("User registered successfully: " + user.getEmail());
-        } else {
-//            logger.error("User registration failed for: " + user.getEmail());
-        }
-
-        return result;
+        return dao.registerUser(user);
     }
 
     // ================= LOGIN =================
     public User login(String email, String password) {
-
-//        logger.info("Login attempt for email: " + email);
-
-        User user = userDAO.login(email, password);
-
-        if (user != null) {
-//            logger.info("Login successful for: " + email);
-        } else {
-//            logger.warn("Login failed for: " + email);
-        }
-
-        return user;
+        return dao.login(email, password);
     }
 
     // ================= PROFILE =================
     public User getUserProfile(int userId) {
-
-        logger.info("Fetching profile for user ID: " + userId);
-
-        return userDAO.getUserById(userId);
-    }
- // ================= SEARCH PROFILE =================
-    public List<User> searchUsers(String keyword) {
-        return userDAO.searchUsers(keyword);
+        return dao.getUserById(userId);
     }
 
-
-    // ================= UPDATE PROFILE =================
     public boolean updateProfile(User user) {
-
-//        logger.info("Updating profile for user ID: " + user.getUserId());
-
-        boolean updated = userDAO.updateProfile(user);
-
-        if (updated) {
-//            logger.info("Profile updated successfully for user ID: " + user.getUserId());
-        } else {
-//            logger.error("Failed to update profile for user ID: " + user.getUserId());
-        }
-
-        return updated;
+        return dao.updateProfile(user);
     }
-    
+
+    // ================= SEARCH =================
+    public List<User> searchUsers(String keyword) {
+        return dao.searchUsers(keyword);
+    }
+
     public int getUserIdByName(String name) {
-        return userDAO.getUserIdByName(name);
+        return dao.getUserIdByName(name);
     }
-    
-    public boolean changePassword(int userId, String oldPass, String newPass) {
-        return userDAO.changePassword(userId, oldPass, newPass);
-    }
-    
-    public boolean resetPassword(String email, String answer, String newPassword) {
-        return userDAO.resetPassword(email, answer, newPassword);
-    }
-    
-    public boolean emailExists(String email) {
-        return userDAO.emailExists(email);
-    }
+
+    // ================= SECURITY QUESTION =================
 
     public String getSecurityQuestion(String email) {
-        return userDAO.getSecurityQuestion(email);
+        return dao.getSecurityQuestion(email);
     }
 
-    public boolean setSecurityQuestion(String email, String q, String a) {
-        return userDAO.setSecurityQuestion(email, q, a);
+    public boolean setSecurityQuestion(String email, String question, String answer) {
+        return dao.setSecurityQuestion(email, question, answer);
     }
 
+    // ================= PASSWORD RESET =================
 
+    public boolean resetPassword(String email, String answer, String newPassword) {
+        return dao.resetPassword(email, answer, newPassword);
+    }
+    
+ // Check if email exists
+    public boolean emailExists(String email) {
+        return dao.emailExists(email);
+    }
 
-
+    // Change password (used after login)
+    public boolean changePassword(int userId, String oldPassword, String newPassword) {
+        return dao.changePassword(userId, oldPassword, newPassword);
+    }
 
 }

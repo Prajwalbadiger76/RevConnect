@@ -4,6 +4,7 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import com.revconnect.model.User;
@@ -13,34 +14,36 @@ import com.revconnect.util.PasswordUtil;
 public class UserDAO {
 
     // ================= REGISTER =================
-    public boolean registerUser(User user) {
+	public boolean registerUser(User user) {
 
-        boolean isRegistered = false;
+	    String sql = "INSERT INTO users (name, email, password, bio, user_type, profile_pic, location, website) " +
+	                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        String sql = "INSERT INTO users " +
-                     "(name, email, password, bio, user_type, profile_pic, location, website) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	    try (Connection con = DBConnection.getConnection();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, user.getName());
+	        ps.setString(2, user.getEmail());
+	        ps.setString(3, PasswordUtil.hashPassword(user.getPassword()));
+	        ps.setString(4, user.getBio());
+	        ps.setString(5, user.getUserType());
+	        ps.setString(6, user.getProfilePic());
+	        ps.setString(7, user.getLocation());
+	        ps.setString(8, user.getWebsite());
 
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, PasswordUtil.hashPassword(user.getPassword()));
-            ps.setString(4, user.getBio());
-            ps.setString(5, user.getUserType());
-            ps.setString(6, user.getProfilePic());
-            ps.setString(7, user.getLocation());
-            ps.setString(8, user.getWebsite());
+	        ps.executeUpdate();
+	        return true;
 
-            isRegistered = ps.executeUpdate() > 0;
+	    } catch (SQLIntegrityConstraintViolationException e) {
+	        // Email already exists
+	        System.out.println(" Email already registered. Please use another email.");
+	        return false;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return isRegistered;
-    }
+	    } catch (Exception e) {
+	        System.out.println(" Registration failed due to system error.");
+	        return false;
+	    }
+	}
 
     // ================= LOGIN =================
     public User login(String email, String password) {
@@ -346,8 +349,5 @@ public class UserDAO {
         }
         return false;
     }
-
-
-
 
 }
