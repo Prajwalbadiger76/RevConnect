@@ -6,7 +6,12 @@ import com.revconnect.util.DBConnection;
 
 public class NotificationDAO {
 
-    public void addNotification(int userId, String message, String category) {
+    // ================= ADD NOTIFICATION =================
+    public boolean addNotification(int userId, String message, String category) {
+
+        if (userId <= 0 || message == null || message.trim().isEmpty()) {
+            return false;
+        }
 
         String sql = "INSERT INTO notifications " +
                      "(user_id, message, category, is_read, created_at) " +
@@ -19,20 +24,20 @@ public class NotificationDAO {
             ps.setString(2, message);
             ps.setString(3, category);
 
-            ps.executeUpdate(); // ✅ THIS WAS MISSING
+            return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
     }
 
+    // ================= GET NOTIFICATIONS =================
     public List<String> getNotifications(int userId) {
 
         List<String> list = new ArrayList<>();
 
         String sql = "SELECT message, category, created_at " +
-                     "FROM notifications WHERE user_id=? " +
-                     "ORDER BY created_at DESC";
+                     "FROM notifications WHERE user_id=? ORDER BY created_at DESC";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -49,13 +54,15 @@ public class NotificationDAO {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            // ignore safely
         }
 
         return list;
     }
 
+    // ================= MARK AS READ =================
     public void markAsRead(int userId) {
+
         String sql = "UPDATE notifications SET is_read='Y' WHERE user_id=?";
 
         try (Connection con = DBConnection.getConnection();
@@ -65,10 +72,11 @@ public class NotificationDAO {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            // ignore
         }
     }
 
+    // ================= UNREAD COUNT =================
     public int getUnreadCount(int userId) {
 
         String sql = "SELECT COUNT(*) FROM notifications WHERE user_id=? AND is_read='N'";
@@ -82,23 +90,26 @@ public class NotificationDAO {
             if (rs.next()) return rs.getInt(1);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            return 0;
         }
 
         return 0;
     }
 
+    // ================= CHECK PREF =================
     public boolean isNotificationEnabled(int userId, String category) {
 
-        String checkSql = "SELECT COUNT(*) FROM notification_preferences WHERE user_id=?";
+        String sql = "SELECT COUNT(*) FROM notification_preferences WHERE user_id=?";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(checkSql)) {
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
 
+            // Auto insert preference row
             if (rs.next() && rs.getInt(1) == 0) {
+
                 String insert = "INSERT INTO notification_preferences " +
                                 "(user_id, follow_enabled, like_enabled, comment_enabled) " +
                                 "VALUES (?, 'Y', 'Y', 'Y')";
@@ -110,7 +121,7 @@ public class NotificationDAO {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            return true;
         }
 
         return true;

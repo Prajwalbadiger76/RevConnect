@@ -349,3 +349,179 @@
 2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 20
 2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
 2026-01-30 15:32:49 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-01-31 12:37:53 [INFO] com.revconnect.service.PostService - Creating post for user ID: 34
+2026-01-31 12:37:54 [INFO] com.revconnect.service.PostService - Post created successfully for user ID: 34
+2026-01-31 12:38:00 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 34
+2026-01-31 12:38:01 [INFO] com.revconnect.service.PostService - Total posts found for user 34: 1
+2026-02-02 00:37:05 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:37:06 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:37:06 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:37:06 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 38
+2026-02-02 00:37:06 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 38
+2026-02-02 00:37:08 [INFO] com.revconnect.service.LikeService - Post 38 liked successfully by user 1
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:37:08 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:37:08 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:37:08 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 35
+2026-02-02 00:37:08 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:37:09 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 21
+2026-02-02 00:37:09 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:37:09 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-02-02 00:40:40 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:40:40 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:40:40 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:40:40 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 43
+2026-02-02 00:40:40 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 43
+2026-02-02 00:40:40 [INFO] com.revconnect.service.LikeService - Post 43 liked successfully by user 1
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:40:41 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:40:41 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:40:41 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 0
+2026-02-02 00:40:41 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:40:41 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 0
+2026-02-02 00:40:41 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:40:41 [ERROR] com.revconnect.service.CommentService - Failed to add comment on post 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 47
+2026-02-02 00:41:07 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 47
+2026-02-02 00:41:07 [INFO] com.revconnect.service.LikeService - Post 47 liked successfully by user 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:41:07 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:41:07 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 0
+2026-02-02 00:41:07 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:41:07 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 0
+2026-02-02 00:41:07 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:41:07 [ERROR] com.revconnect.service.CommentService - Failed to add comment on post 1
+2026-02-02 00:44:44 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:44:44 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:44:44 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:44:44 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 51
+2026-02-02 00:44:44 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 51
+2026-02-02 00:44:44 [INFO] com.revconnect.service.LikeService - Post 51 liked successfully by user 1
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:44:45 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:44:45 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:44:45 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 45
+2026-02-02 00:44:45 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:44:45 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 22
+2026-02-02 00:44:45 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:44:45 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-02-02 00:52:34 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:52:34 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:52:34 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 56
+2026-02-02 00:52:35 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 56
+2026-02-02 00:52:35 [INFO] com.revconnect.service.LikeService - Post 56 liked successfully by user 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:52:35 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:52:35 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 47
+2026-02-02 00:52:35 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 23
+2026-02-02 00:52:35 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:52:35 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-02-02 00:57:52 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 00:57:52 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 00:57:52 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 58
+2026-02-02 00:57:53 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 58
+2026-02-02 00:57:53 [INFO] com.revconnect.service.LikeService - Post 58 liked successfully by user 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 00:57:53 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 00:57:53 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 49
+2026-02-02 00:57:53 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 24
+2026-02-02 00:57:53 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 00:57:53 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 60
+2026-02-02 01:01:28 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 60
+2026-02-02 01:01:28 [INFO] com.revconnect.service.LikeService - Post 60 liked successfully by user 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 01:01:28 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 01:01:28 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 0
+2026-02-02 01:01:28 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 01:01:28 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 0
+2026-02-02 01:01:28 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 01:01:28 [ERROR] com.revconnect.service.CommentService - Failed to add comment on post 1
+2026-02-02 01:02:31 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 01:02:31 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 51
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 01:03:42 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 01:03:42 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 01:03:42 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 52
+2026-02-02 01:04:04 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 63
+2026-02-02 01:04:04 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 63
+2026-02-02 01:04:04 [INFO] com.revconnect.service.LikeService - Post 63 liked successfully by user 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 01:04:04 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 01:04:04 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 54
+2026-02-02 01:04:04 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 25
+2026-02-02 01:04:04 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 01:04:04 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1
+2026-02-02 01:06:04 [INFO] com.revconnect.service.LikeService - Fetching like count for post 1
+2026-02-02 01:06:04 [INFO] com.revconnect.service.LikeService - Post 1 has 4 likes
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Fetching last inserted post ID for user 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Last post ID for user 1 is 65
+2026-02-02 01:06:05 [INFO] com.revconnect.service.LikeService - User 1 attempting to like post 65
+2026-02-02 01:06:05 [INFO] com.revconnect.service.LikeService - Post 65 liked successfully by user 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - User 9999 attempting to delete post 1
+2026-02-02 01:06:05 [WARN] com.revconnect.service.PostService - Failed to delete post 1 by user 9999
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 9999
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Total posts found for user 9999: 0
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - User 1 attempting to delete post 9999
+2026-02-02 01:06:05 [WARN] com.revconnect.service.PostService - Failed to delete post 9999 by user 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Fetching posts for user ID: 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.PostService - Total posts found for user 1: 56
+2026-02-02 01:06:05 [INFO] com.revconnect.service.CommentService - Fetching comments for post 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.CommentService - Total comments found for post 1: 26
+2026-02-02 01:06:05 [INFO] com.revconnect.service.CommentService - User 1 attempting to comment on post 1
+2026-02-02 01:06:05 [INFO] com.revconnect.service.CommentService - Comment added successfully on post 1

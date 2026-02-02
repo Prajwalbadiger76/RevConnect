@@ -12,33 +12,37 @@ import com.revconnect.util.DBConnection;
 public class PostDAO {
 
     // ================= CREATE POST =================
-    public boolean createPost(Post post) {
+	public boolean createPost(Post post) {
 
-        boolean created = false;
+	    // ✅ Validation (VERY IMPORTANT)
+	    if (post == null) {
+	        return false;
+	    }
 
-//        String sql = "INSERT INTO posts (user_id, content) VALUES (?, ?)";
-        String sql = "INSERT INTO posts (user_id, content, hashtags) VALUES (?, ?, ?)";
+	    if (post.getUserId() <= 0) {
+	        return false;
+	    }
 
+	    if (post.getContent() == null || post.getContent().trim().isEmpty()) {
+	        return false;
+	    }
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+	    String sql = "INSERT INTO posts (user_id, content, hashtags) VALUES (?, ?, ?)";
 
-            ps.setInt(1, post.getUserId());
-            ps.setString(2, post.getContent());
-            ps.setString(3, post.getHashtags()); 
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            int rows = ps.executeUpdate();
+	        ps.setInt(1, post.getUserId());
+	        ps.setString(2, post.getContent());
+	        ps.setString(3, post.getHashtags());
 
-            if (rows > 0) {
-                created = true;
-            }
+	        return ps.executeUpdate() > 0;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return created;
-    }
+	    } catch (Exception e) {
+	        // No logger as requested
+	        return false;
+	    }
+	}
 
     // ================= GET POSTS BY USER =================
     public List<Post> getPostsByUserId(int userId) {

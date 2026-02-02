@@ -17,14 +17,14 @@ public class PostService {
     // ================= CREATE POST =================
     public boolean createPost(Post post) {
 
-        logger.info("Creating post for user ID: {}", post.getUserId());
+//        logger.info("Creating post for user ID: {}", post.getUserId());
 
         boolean result = postDAO.createPost(post);
 
         if (result) {
-            logger.info("Post created successfully for user ID: {}", post.getUserId());
+//            logger.info("Post created successfully for user ID: {}", post.getUserId());
         } else {
-            logger.error("Failed to create post for user ID: {}", post.getUserId());
+//            logger.error("Failed to create post for user ID: {}", post.getUserId());
         }
 
         return result;

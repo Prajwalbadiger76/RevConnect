@@ -131,7 +131,7 @@ public class MainApp {
 	        }
 
 	        // ❌ Login failed
-	        System.out.println("\n Invalid email or password!");
+	        System.out.println("\nInvalid email or password!");
 
 	        System.out.println("\n1. Try Again");
 	        System.out.println("2. Forgot Password");

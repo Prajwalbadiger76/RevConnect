@@ -9,15 +9,10 @@ public class NotificationService {
 
     public void notifyUser(int userId, String message, String category) {
 
-        // If preference row exists → respect it
-        // If not exists → allow notification
-        boolean allowed = dao.isNotificationEnabled(userId, category);
-
-        if (allowed) {
+        if (dao.isNotificationEnabled(userId, category)) {
             dao.addNotification(userId, message, category);
         }
     }
-
 
     public List<String> getNotifications(int userId) {
         return dao.getNotifications(userId);
@@ -26,10 +21,8 @@ public class NotificationService {
     public void markAsRead(int userId) {
         dao.markAsRead(userId);
     }
-    
+
     public int getUnreadCount(int userId) {
         return dao.getUnreadCount(userId);
     }
-
-
 }
